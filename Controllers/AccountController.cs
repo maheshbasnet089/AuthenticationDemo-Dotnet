@@ -61,4 +61,20 @@ public async Task<IActionResult> Register([FromBody] AddOrUpdateAppUserModel mod
     }
     return BadRequest(ModelState);
 }
+
+[HttpPost("login")]
+public async Task<IActionResult> Login([FromBody] LoginModel model){
+    if(ModelState.IsValid){
+        var user = await userManager.FindByNameAsync(model.UserName);
+        if(user!=null){
+            if(await userManager.CheckPasswordAsync(user,model.Password)){
+                var token = GenerateToken(model.UserName); 
+                return Ok(new {token});
+            }
+        }
+    }
+    return BadRequest(ModelState);
+}
+
+
 }
