@@ -18,9 +18,10 @@ builder.Services.AddAuthentication(options=>{
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options=>{
-    var secret = builder.Configuration["JwtConfig:secret"]; 
+    var secret = builder.Configuration["JwtConfig:Secret"]; 
+    Console.Write(secret + "SECRET");
     var issuer = builder.Configuration["JwtConfig:ValidIssuer"]; 
-    var audience = builder.Configuration["JwtConfig:ValidAudiences"]; 
+    var audience = builder.Configuration["JwtConfig:ValidAudience"]; 
     if(secret is null || issuer is null || audience is null){
         throw new ApplicationException("Jwt is not set in the configuration"); 
     }

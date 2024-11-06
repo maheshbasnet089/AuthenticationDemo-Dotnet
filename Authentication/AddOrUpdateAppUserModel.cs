@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-class AddOrUpdateAppUserModel
+public class AddOrUpdateAppUserModel
 {
     [Required(ErrorMessage ="User name is required")]
     public string UserName{get;set;} = string.Empty;
